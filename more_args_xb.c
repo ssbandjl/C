@@ -1,22 +1,22 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-double average(int num,...)
+/*定义一个函数，最后一个参数为省略号，省略号前面可以设置自定义参数*/
+double average(int num,...) 
 {
-
+	/*在函数定义中创建一个 va_list 类型变量，该类型是在 stdarg.h 头文件中定义的*/
     va_list valist;
     double sum = 0.0;
     int i;
-
-    /* 为 num 个参数初始化 valist */
+    /* 为 num 个参数初始化 valist,使用 int 参数和 va_start 宏来初始化 va_list 变量为一个参数列表。宏 va_start 是在 stdarg.h 头文件中定义的*/
     va_start(valist, num);
 
-    /* 访问所有赋给 valist 的参数 */
+    /* 使用 va_arg 宏和 va_list 变量来访问参数列表中的每个项,访问所有赋给 valist 的参数 */
     for (i = 0; i < num; i++)
     {
        sum += va_arg(valist, int);
     }
-    /* 清理为 valist 保留的内存 */
+    /* 使用宏 va_end 来清理赋予 va_list 变量的内存,清理为 valist 保留的内存 */
     va_end(valist);
 
     return sum/num;
